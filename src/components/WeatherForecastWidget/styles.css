@@ -1,5 +1,10 @@
 .WeatherForecastWidget {
-    margin: auto 0;
-    padding: 0 1rem;
-    border-style: solid;
+  margin: auto 0;
+  padding: 0 1rem;
+  border-style: solid;
+}
+
+.searchInput {
+  margin-left: 1rem;
+  width: 100%
 }

@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint ./src",
+    "lint": "./node_modules/.bin/eslint src --ext .js,.jsx,.ts,.tsx",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'"
   },
   "browserslist": {
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/react-bootstrap": "^0.32.24",
+    "babel-eslint": "^10.1.0",
     "react-bootstrap": "^1.4.0"
   }
 }

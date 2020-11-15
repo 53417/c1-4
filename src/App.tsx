@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import WeatherForecastWidget from './components/WeatherForecastWidget/WeatherForecastWidget'
+import WeatherForecastWidget from './components/WeatherForecastWidget/WeatherForecastWidget';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
