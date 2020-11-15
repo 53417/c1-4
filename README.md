@@ -3,6 +3,8 @@ Language: ReactJS / Typescript
 
 API: MetaWeather (https://www.metaweather.com/)
 
+Try it out at: https://53417.github.io/c1-4/
+
 ![weather](https://user-images.githubusercontent.com/48437598/99191310-1a194580-27c0-11eb-973e-6b037d0bf5d1.png)
 
 - [X] Create a React application with the tooling and the design system of your choice
