@@ -14,7 +14,7 @@ API: MetaWeather (https://www.metaweather.com/)
     - [X] Wind speed
 - [ ] Add tests to your application
 - [ ] Ensure that the application outputs production-ready artifacts
-- [ ] Use the geolocation browser API in order to find the user’s location, pre-populate the form and display the weather forecast when the page has loaded
+- [X] Use the geolocation browser API in order to find the user’s location, pre-populate the form and display the weather forecast when the page has loaded
 
 ## Requirements
 - Node Package Manager (https://www.npmjs.com/)
