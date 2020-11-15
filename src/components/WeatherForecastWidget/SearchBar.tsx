@@ -16,27 +16,6 @@ export default class SearchBar extends React.Component<any> {
       locationList: []
     }
 
-    handleGeolocationButton = async () => {
-      if (navigator.geolocation) {
-        let geolocation: {latitude?: number, longitude?: number} = {};
-        await navigator.geolocation.getCurrentPosition((position: any) => {
-          geolocation = position;
-        });
-        if(geolocation.latitude && geolocation.longitude) {
-          const location = await metaWeather.getLocationData({
-            latitude: geolocation.latitude,
-            longitude: geolocation.longitude
-          });
-          const weatherData = await metaWeather.getWeatherData(location.woeid.toString());
-          this.props.updateWidgetState({
-            weatherData
-          });
-        }
-      } else {
-        alert('Geolocation is not supported by this browser.');
-      }
-    }
-
     handleSearch = async (event: any) => {
       const locationList = await metaWeather.getLocationData(event.target.value);
       this.setState({
@@ -62,14 +41,14 @@ export default class SearchBar extends React.Component<any> {
         <div className="input-group col-sm-12">
           <div className="input-group-prepend">
             <span className="input-group-text">
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search"/>
             </span>
           </div>
 
-          <DebounceInput debounceTimeout={500} onChange={(event: any) => this.handleSearch(event)} value={this.state.locationQuery} placeholder="Search"></DebounceInput>
+          <DebounceInput debounceTimeout={500} onChange={(event: any) => this.handleSearch(event)} value={this.state.locationQuery} placeholder="Search"/>
 
           <div className="input-group-append ">
-            <button className="btn btn-outline-secondary" type="button" onClick={this.handleGeolocationButton}><i className="fas fa-map-marker-alt"></i></button>
+            <button className="btn btn-outline-secondary" type="button" onClick={this.props.handleGeolocation}><i className="fas fa-map-marker-alt"/></button>
           </div>
         </div>
 

@@ -7,62 +7,87 @@ import { metaWeatherLocationResponse, consolidatedWeatherObject } from '../../ap
 import WeatherCardSmall from './WeatherCardSmall';
 
 type WeatherForecastWidgetState = {
-    weatherData: metaWeatherLocationResponse | null,
+  weatherData: metaWeatherLocationResponse | null,
+  loading: boolean
 }
 
 export default class WeatherForecastWidget extends React.Component<any> {
+  state: WeatherForecastWidgetState = {
+    weatherData: null,
+    loading: true
+  }
 
-    state: WeatherForecastWidgetState = {
-      weatherData: null
+  async componentDidMount() {
+    this.handleGeolocation();
+  }
+
+  // re-render child components on state change
+  componentDidUpdate(prevProps: metaWeatherLocationResponse) {
+    if(prevProps.title !== this.props.title) {
+      this.setState({ title: this.props.title });
     }
+  }
 
-    async componentDidMount() {
-      const weatherData = await metaWeather.getWeatherData('1105779');
-      this.setState({ weatherData });
+  // lets child components update parent component
+  updateWidgetState = (data: {}) => {
+    this.setState({ loading: true });
+    this.setState(data);
+    this.setState({ loading: false });
+  }
+  
+  // handles geolocation from browser search
+  // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+  handleGeolocation = () => {
+    if (navigator.geolocation) {
+      let geolocation: {latitude?: number, longitude?: number} = {};
+      navigator.geolocation.getCurrentPosition(async (position: any) => {
+        const geolocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        if(geolocation.latitude && geolocation.longitude) {
+          const location = await metaWeather.getLocationData(geolocation);
+          const weatherData = await metaWeather.getWeatherData(location[0].woeid);
+          this.updateWidgetState({
+            weatherData
+          });
+        }
+      });
+    } else {
+      alert('Geolocation is not supported by this browser.');
     }
+  }
 
-    // re-render child components on state change
-    componentDidUpdate(prevProps: metaWeatherLocationResponse) {
-      if(prevProps.title !== this.props.title) {
-        this.setState({ title: this.props.title });
-      }
-    }
-
-    // lets child components update parent component
-    updateWidgetState = (data: {}) => {
-      this.setState(data);
-    }
-
-    render() {
-      return <div className="WeatherForecastWidget">
-        <div className="container">
-          <div className="row">
-            <h1><a href="https://www.metaweather.com/">MetaWeather</a> @ {this.state.weatherData?.title}</h1>
-          </div>
-
-          <div className="row">
-            <SearchBar updateWidgetState={this.updateWidgetState}></SearchBar>
-          </div>
-
-          <div className="row">
-            {
-              this.state.weatherData?.consolidated_weather
-                ? <WeatherCardLarge weatherData={this.state.weatherData?.consolidated_weather[0]}></WeatherCardLarge>
-                : <div>Loading</div>
-            }
-          </div>
-
-          <div className="row">
-            {/*parse the 2nd to 4th value of consolidated_weather array to display next 3 days of weather*/}
-            {
-              this.state.weatherData?.consolidated_weather
-                ? this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
-                  return <WeatherCardSmall weatherData={day}></WeatherCardSmall>;
-                })
-                : <div>Loading</div>
-            }
-          </div>
+  render() {
+    return <div className="WeatherForecastWidget">
+      <div className="container">
+        <div className="row">
+          <h1><a href="https://www.metaweather.com/">MetaWeather</a> @ {this.state.weatherData?.title}</h1>
         </div>
-      </div>;
-    }
+
+        <div className="row">
+          <SearchBar updateWidgetState={this.updateWidgetState} handleGeolocation={this.handleGeolocation}></SearchBar>
+        </div>
+
+        <div className="row">
+          {
+            this.state.loading
+              ? <div>Loading</div>
+              : <WeatherCardLarge weatherData={this.state.weatherData?.consolidated_weather[0]}></WeatherCardLarge>
+          }
+        </div>
+
+        <div className="row">
+          {/*parse the 2nd to 4th value of consolidated_weather array to display next 3 days of weather*/}
+          {
+            this.state.loading
+              ? <div>Loading</div>
+              : this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
+                return <WeatherCardSmall weatherData={day}></WeatherCardSmall>;
+              })
+          }
+        </div>
+      </div>
+    </div>;
+  }
 }
