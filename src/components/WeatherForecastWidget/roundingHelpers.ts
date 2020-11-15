@@ -1,4 +1,4 @@
-const roundingHelper = (num: number | undefined, dec?: number) => {
+const roundingHelpers = (num: number | undefined, dec?: number) => {
   if(num === undefined) {
     return;
   }
@@ -9,4 +9,4 @@ const roundingHelper = (num: number | undefined, dec?: number) => {
   return rounded;
 };
 
-export default roundingHelper;
+export default roundingHelpers;
