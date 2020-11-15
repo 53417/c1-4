@@ -5,7 +5,7 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       target: 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com',
-      changeOrigin: true
+      changeOrigin: true,
     })
   );
 };
