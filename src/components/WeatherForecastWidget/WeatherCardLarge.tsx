@@ -26,10 +26,10 @@ export default class WeatherCardLarge extends React.Component<any> {
           <div className="card-body">
             <div className="row">
               <div className="col-sm-6">
-                <h3>Today</h3>
-                <h3>{today?.applicable_date}</h3>
-                <img src={`https://www.metaweather.com/static/img/weather/${today?.weather_state_abbr}.svg`}></img>
-                <h4>{today?.weather_state_name}</h4>
+                <h2>Today</h2>
+                <h2>{today?.applicable_date}</h2>
+                <img src={`https://www.metaweather.com/static/img/weather/${today?.weather_state_abbr}.svg`}/>
+                <h3>{today?.weather_state_name}</h3>
               </div>
 
               <div className="col-sm-6">

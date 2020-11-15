@@ -37,7 +37,7 @@ export default class WeatherForecastWidget extends React.Component<any> {
       return <div className="WeatherForecastWidget">
         <div className="container">
           <div className="row">
-            <h1>Weather @ {this.state.weatherData?.title}</h1>
+            <h1><a href="https://www.metaweather.com/">MetaWeather</a> @ {this.state.weatherData?.title}</h1>
           </div>
 
           <div className="row">

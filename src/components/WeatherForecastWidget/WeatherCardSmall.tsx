@@ -12,7 +12,7 @@ export default class WeatherCardSmall extends React.Component<any> {
       consolidated_weather: null
     }
     componentDidMount() {
-     this.setState({
+      this.setState({
         consolidated_weather: this.props.weatherData
       });
     }
@@ -22,9 +22,9 @@ export default class WeatherCardSmall extends React.Component<any> {
       return <div className="col-sm-4">
         <div className="card bg-transparent border-0">
           <div className="card-body">
-            <h3>{day?.applicable_date}</h3>
-            <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}></img>
-            <h4>{day?.weather_state_name}</h4>
+            <h2>{day?.applicable_date}</h2>
+            <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}/>
+            <h3>{day?.weather_state_name}</h3>
             <ul>
               <li>Min Temp: {roundingHelper(day?.min_temp, 100)}°C</li>
               <li>Max Temp: {roundingHelper(day?.max_temp, 100)}°C</li>
