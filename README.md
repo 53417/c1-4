@@ -3,6 +3,8 @@ Language: ReactJS / Typescript
 
 API: MetaWeather (https://www.metaweather.com/)
 
+![weather_widget](https://user-images.githubusercontent.com/48437598/99188850-40d07f80-27b2-11eb-87b6-b232882e06a4.png)
+
 - [X] Create a React application with the tooling and the design system of your choice
 - [X] Create a simple form that takes a location as an input parameter.
 - [X] Integrate with the metaweather API to find the entered location: if there are many results for the search text entered, the user may have to select the desired location.
