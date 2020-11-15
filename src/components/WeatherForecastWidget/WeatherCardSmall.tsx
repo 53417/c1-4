@@ -1,6 +1,6 @@
 import React from 'react';
 import { consolidatedWeatherObject } from '../../api/types';
-import roundingHelpers from './roundingHelpers';
+import roundingHelper from './roundingHelper';
 
 type weatherCardSmallState = {
     consolidated_weather: consolidatedWeatherObject | null,
@@ -26,10 +26,10 @@ export default class WeatherCardSmall extends React.Component<any> {
             <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}/>
             <h3>{day?.weather_state_name}</h3>
             <ul>
-              <li>Min <i className="fas fa-temperature-low"/> {roundingHelpers(day?.min_temp, 100)}°C</li>
-              <li>Max <i className="fas fa-temperature-high"/> {roundingHelpers(day?.max_temp, 100)}°C</li>
+              <li>Min <i className="fas fa-temperature-low"/> {roundingHelper(day?.min_temp, 2)}°C</li>
+              <li>Max <i className="fas fa-temperature-high"/> {roundingHelper(day?.max_temp, 2)}°C</li>
               <li><i className="fas fa-wind"/> Direction: {day?.wind_direction_compass}</li>
-              <li><i className="fas fa-wind"/> Speed: {roundingHelpers(day?.wind_speed, 100)}mph</li>
+              <li><i className="fas fa-wind"/> Speed: {roundingHelper(day?.wind_speed, 2)}mph</li>
             </ul>
           </div>
         </div>

@@ -1,4 +1,3 @@
-// https://github.com/chimurai/http-proxy-middleware
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
@@ -7,6 +6,9 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: 'https://www.metaweather.com',
       changeOrigin: true,
+      onProxyRes: function (proxyRes, req, res) {
+        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+      },
     })
   );
 };
