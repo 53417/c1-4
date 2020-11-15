@@ -4,11 +4,8 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://www.metaweather.com',
-      changeOrigin: true,
-      onProxyRes: function (proxyRes, req, res) {
-        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-      },
+      target: 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com',
+      changeOrigin: true
     })
   );
 };

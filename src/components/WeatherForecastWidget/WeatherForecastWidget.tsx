@@ -46,11 +46,15 @@ export default class WeatherForecastWidget extends React.Component<any> {
           longitude: position.coords.longitude
         };
         if(geolocation.latitude && geolocation.longitude) {
-          const location = await metaWeather.getLocationData(geolocation);
-          const weatherData = await metaWeather.getWeatherData(location[0].woeid);
-          this.updateWidgetState({
-            weatherData
-          });
+          try {
+            const location = await metaWeather.getLocationData(geolocation);
+            const weatherData = await metaWeather.getWeatherData(location[0].woeid);
+            this.updateWidgetState({
+              weatherData
+            });  
+          } catch(err) {
+            return err;
+          }
         }
       });
     } else {
