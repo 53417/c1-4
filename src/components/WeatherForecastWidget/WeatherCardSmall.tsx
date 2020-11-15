@@ -1,5 +1,6 @@
 import React from 'react';
 import { consolidatedWeatherObject } from '../../api/types';
+import roundingHelper from './roundingHelper';
 
 type weatherCardSmallState = {
     consolidated_weather: consolidatedWeatherObject | null,
@@ -10,25 +11,27 @@ export default class WeatherCardSmall extends React.Component<any> {
     state: weatherCardSmallState = {
       consolidated_weather: null
     }
-
-    async componentDidMount() {
-      this.setState({
+    componentDidMount() {
+     this.setState({
         consolidated_weather: this.props.weatherData
       });
-
     }
-
+    
     render() {
       const day = this.state.consolidated_weather;
-      return <div className="card col-sm-4">
-        <div className="card-body">
-          <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}></img>
-          <p>{day?.weather_state_name}</p>
-          <p>{day?.the_temp}</p>
-          <p>Min: {day?.min_temp}</p>
-          <p>Max: {day?.max_temp}</p>
-          <p>Wind Direction: {day?.wind_direction_compass}</p>
-          <p>Wind speed: {day?.wind_speed}</p>
+      return <div className="col-sm-4">
+        <div className="card bg-transparent border-0">
+          <div className="card-body">
+            <h3>{day?.applicable_date}</h3>
+            <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}></img>
+            <h4>{day?.weather_state_name}</h4>
+            <ul>
+              <li>Min Temp: {roundingHelper(day?.min_temp, 100)}°C</li>
+              <li>Max Temp: {roundingHelper(day?.max_temp, 100)}°C</li>
+              <li>Wind Direction: {day?.wind_direction_compass}</li>
+              <li>Wind Speed: {roundingHelper(day?.wind_speed, 100)}mph</li>
+            </ul>
+          </div>
         </div>
       </div>;
     }

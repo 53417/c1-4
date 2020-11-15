@@ -1,44 +1,46 @@
 import React from 'react';
-import { metaWeatherLocationResponse } from '../../api/types';
+import {consolidatedWeatherObject} from '../../api/types';
+import roundingHelper from './roundingHelper';
 
 type weatherCardLargeState = {
-    weatherData: metaWeatherLocationResponse | null,
+  consolidated_weather: consolidatedWeatherObject | null,
 }
 
 export default class WeatherCardLarge extends React.Component<any> {
 
     state: weatherCardLargeState = {
-      weatherData: null
+      consolidated_weather: null
     }
 
-    async componentDidMount() {
+    componentDidMount() {
       this.setState({
-        weatherData: this.props.weatherData
+        consolidated_weather: this.props.weatherData
       });
 
     }
 
     render() {
-      const today = this.state.weatherData?.consolidated_weather[0];
-      return <div className="row">
-        <div className="card col-sm-12">
+      const today = this.state.consolidated_weather;
+      return <div className="col-sm-12">
+        <div className="card bg-transparent border-0">
           <div className="card-body">
             <div className="row">
-              <h2 className="card-title">{this.state.weatherData?.title}</h2>
-            </div>
-
-            <div className="row">
-              <div className="col-sm-4">
+              <div className="col-sm-6">
+                <h3>Today</h3>
+                <h3>{today?.applicable_date}</h3>
                 <img src={`https://www.metaweather.com/static/img/weather/${today?.weather_state_abbr}.svg`}></img>
-                <h3>{today?.weather_state_name}</h3>
-                <p>{today?.the_temp}</p>
+                <h4>{today?.weather_state_name}</h4>
               </div>
 
-              <div className="col-sm-8">
-                <p>Min: {today?.min_temp}</p>
-                <p>Max: {today?.max_temp}</p>
-                <p>Wind Direction: {today?.wind_direction_compass}</p>
-                <p>Wind speed: {today?.wind_speed}</p>
+              <div className="col-sm-6">
+                <div className="WeatherLargeCardDetails">
+                  <ul>
+                    <li>Min Temp: {roundingHelper(today?.min_temp, 100)}°C</li>
+                    <li>Max Temp: {roundingHelper(today?.max_temp, 100)}°C</li>
+                    <li>Wind Direction: {today?.wind_direction_compass}</li>
+                    <li>Wind Speed: {roundingHelper(today?.wind_speed, 100)}mph</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

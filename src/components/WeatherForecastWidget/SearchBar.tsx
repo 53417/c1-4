@@ -12,7 +12,7 @@ type searchBarState = {
 
 export default class SearchBar extends React.Component<any> {
     state: searchBarState = {
-      locationQuery: 'Sydney',
+      locationQuery: '',
       locationList: []
     }
 
@@ -59,19 +59,17 @@ export default class SearchBar extends React.Component<any> {
 
     render() {
       return <div className="searchBar">
-        <div className="row">
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <i className="fas fa-search"></i>
-              </span>
-            </div>
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text">
+              <i className="fas fa-search"></i>
+            </span>
+          </div>
 
-            <DebounceInput debounceTimeout={500} onChange={(event: any) => this.handleSearch(event)} value={this.state.locationQuery}></DebounceInput>
+          <DebounceInput debounceTimeout={500} onChange={(event: any) => this.handleSearch(event)} value={this.state.locationQuery} placeholder="Search"></DebounceInput>
 
-            <div className="input-group-append">
-              <button className="btn btn-outline-secondary" type="button" onClick={this.handleGeolocationButton}><i className="fas fa-map-marker-alt"></i></button>
-            </div>
+          <div className="input-group-append">
+            <button className="btn btn-outline-secondary" type="button" onClick={this.handleGeolocationButton}><i className="fas fa-map-marker-alt"></i></button>
           </div>
         </div>
 

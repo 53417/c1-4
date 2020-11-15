@@ -37,18 +37,30 @@ export default class WeatherForecastWidget extends React.Component<any> {
       return <div className="WeatherForecastWidget">
         <div className="container">
           <div className="row">
-            <h1>Weather</h1>
+            <h1>Weather @ {this.state.weatherData?.title}</h1>
           </div>
 
-          <SearchBar updateWidgetState={this.updateWidgetState}></SearchBar>
+          <div className="row">
+            <SearchBar updateWidgetState={this.updateWidgetState}></SearchBar>
+          </div>
 
-          <WeatherCardLarge weatherData={this.state.weatherData}></WeatherCardLarge>
+          <div className="row">
+            {
+              this.state.weatherData?.consolidated_weather
+                ? <WeatherCardLarge weatherData={this.state.weatherData?.consolidated_weather[0]}></WeatherCardLarge>
+                : <div>Loading</div>
+            }
+          </div>
 
           <div className="row">
             {/*parse the 2nd to 4th value of consolidated_weather array to display next 3 days of weather*/}
-            {this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
-              return <WeatherCardSmall weatherData={day}></WeatherCardSmall>;
-            })}
+            {
+              this.state.weatherData?.consolidated_weather
+                ? this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
+                  return <WeatherCardSmall weatherData={day}></WeatherCardSmall>;
+                })
+                : <div>Loading</div>
+            }
           </div>
         </div>
       </div>;
