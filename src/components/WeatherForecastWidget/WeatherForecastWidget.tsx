@@ -1,72 +1,56 @@
 import React from 'react';
 import './styles.css'
-import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css'
+import SearchBar from './SearchBar'
+import WeatherCardLarge from './WeatherCardLarge'
+import metaWeather from "../../api/metaWeather";
+import {metaWeatherLocationResponse, consolidatedWeatherObject} from "../../api/types"
+import WeatherCardSmall from "./WeatherCardSmall";
 
-const WeatherForecastWidget: React.FC = () => {
-    return (
-        <div className="WeatherForecastWidget">
+type WeatherForecastWidgetState = {
+    weatherData: metaWeatherLocationResponse | null,
+}
+
+export default class WeatherForecastWidget extends React.Component<any> {
+
+    state: WeatherForecastWidgetState = {
+        weatherData: null
+    }
+
+    async componentDidMount() {
+        const weatherData = await metaWeather.getWeatherData('1105779')
+        this.setState({weatherData})
+    }
+
+    // re-render child components on state change
+    componentDidUpdate(prevProps: metaWeatherLocationResponse) {
+        if(prevProps.title !== this.props.title) {
+            this.setState({title: this.props.title});
+        }
+    }
+
+    // lets child components update parent component
+    updateWidgetState = (data: {}) => {
+        this.setState(data)
+    }
+
+    render() {
+        return <div className="WeatherForecastWidget">
             <div className="container">
                 <div className="row">
                     <h1>Weather</h1>
                 </div>
 
-                <div className="row">
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text">
-                                <i className="fas fa-search"></i>
-                            </span>
-                        </div>
-                        <input type="text" className="form-control" placeholder="Sydney"></input>
-                        <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button"><i className="fas fa-map-marker-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
+                <SearchBar updateWidgetState={this.updateWidgetState}></SearchBar>
+
+                <WeatherCardLarge weatherData={this.state.weatherData}></WeatherCardLarge>
 
                 <div className="row">
-                    <div className="card col-sm-12">
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <h2 className="card-title">Location</h2>
-                                    <p>icons</p>
-                                    <br></br>
-                                    <p>degrees</p>
-                                    <br></br>
-                                    <p>description of weather</p>
-                                </div>
-
-                                <div className="col-sm-6">
-                                    <p>minimum temp</p>
-                                    <br></br>
-                                    <p>max temp</p>
-                                    <br></br>
-                                    <p>wind speed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="card col-sm-4">
-                        <div className="card-body">
-                            <p>day</p>
-                            <br></br>
-                            <p>icon</p>
-                            <br></br>
-                            <p>description</p>
-                            <br></br>
-                            <p>min max temp</p>
-                            <br></br>
-                            <p>wind speed</p>
-                        </div>
-                    </div>
+                    {/*parse the 2nd to 4th value of consolidated_weather array to display next 3 days of weather*/}
+                    {this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
+                        return <WeatherCardSmall weatherData={day}></WeatherCardSmall>
+                    })}
                 </div>
             </div>
         </div>
-    )
+    }
 }
-
-export default WeatherForecastWidget;
