@@ -1,7 +1,7 @@
 // proxied to "https://www.metaweather.com" in setupProxy.js for dev
 // const baseUrl = '/api';
 
-// using cors-anywhere for github pages
+// using cors-anywhere for github pages as metaweather does not attach response header Access-Control-Allow-Origin: *
 const baseUrl = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api';
 
 const getLocationData = async (query: string | {latitude: number; longitude: number}) => {
