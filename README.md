@@ -14,7 +14,7 @@ Try it out at: https://53417.github.io/c1-4/
     - [X] General description of the weather
     - [X] Minimum and maximum temperature
     - [X] Wind speed
-- [ ] Add tests to your application
+- [X] Add tests to your application
 - [ ] Ensure that the application outputs production-ready artifacts
 - [X] Use the geolocation browser API in order to find the user’s location, pre-populate the form and display the weather forecast when the page has loaded
 
