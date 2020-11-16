@@ -26,13 +26,17 @@ export default class SearchBar extends React.Component<any> {
 
     handleLocationListSelect = async (index: number) => {
       const selectedLocation = this.state.locationList[index];
-      const weatherData = await metaWeather.getWeatherData(selectedLocation.woeid.toString());
-      this.props.updateWidgetState({
-        weatherData
-      });
       this.setState({
         locationQuery: selectedLocation.title,
         locationList: []
+      });
+      this.props.updateWidgetState({
+        loading: true
+      });
+      const weatherData = await metaWeather.getWeatherData(selectedLocation.woeid.toString());
+      this.props.updateWidgetState({
+        weatherData,
+        loading: false
       });
     }
 
