@@ -25,14 +25,14 @@ export default class WeatherCardLarge extends React.Component<any> {
         <div className="card bg-transparent border-0" aria-label={day?.applicable_date}>
           <div className="card-body">
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-lg-6">
                 <h2>Today</h2>
                 <h2>{day?.applicable_date}</h2>
                 <img src={`https://www.metaweather.com/static/img/weather/${day?.weather_state_abbr}.svg`}/>
                 <h3>{day?.weather_state_name}</h3>
               </div>
 
-              <div className="col-sm-6">
+              <div className="col-lg-6">
                 <div className="WeatherLargeCardDetails">
                   <ul>
                     <li>Min <i className="fas fa-temperature-low"/> {roundingHelper(day?.min_temp, 2)}°C</li>
