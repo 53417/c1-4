@@ -45,16 +45,31 @@ export default class SearchBar extends React.Component<any> {
             </span>
           </div>
 
-          <DebounceInput debounceTimeout={500} onChange={(event: any) => this.handleSearch(event)} value={this.state.locationQuery} placeholder="Search"/>
+          <DebounceInput 
+            aria-label="search location" 
+            debounceTimeout={500} 
+            onChange={(event: any) => this.handleSearch(event)} 
+            value={this.state.locationQuery} 
+            placeholder="Search"/>
 
           <div className="input-group-append ">
-            <button className="btn btn-outline-secondary" type="button" onClick={this.props.handleGeolocation}><i className="fas fa-map-marker-alt"/></button>
+            <button 
+              aria-label="weather by geolocation" 
+              className="btn btn-outline-secondary" 
+              type="button" 
+              onClick={this.props.handleGeolocation}>
+              <i className="fas fa-map-marker-alt"/>
+            </button>
           </div>
         </div>
 
         <ul className="list-group">
           {this.state.locationList?.map((location: metaWeatherLocationSearchResponse, index: number ) => {
-            return <li key={index} className="list-group-item searchResult" onClick={() => this.handleLocationListSelect(index)}>{location.title}</li>;
+            return <li 
+              key={index} 
+              className="list-group-item searchResult" 
+              onClick={() => this.handleLocationListSelect(index)}>{location.title}
+            </li>;
           })}
         </ul>
       </div>;

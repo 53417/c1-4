@@ -1,17 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from '../App';
+import WeatherForecastWidget from './../../weatherForecastWidget/app/App';
 
 window.alert = jest.fn();
 
 test('renders title', () => {
-  render(<App />);
+  render(<WeatherForecastWidget />);
   const linkElement = screen.getByText(/MetaWeather/i);
   expect(linkElement).toBeInTheDocument();
-});
-
-test('renders searchbar', () => {
-  render(<App />);
   const searchElement = screen.getByPlaceholderText('Search');
-  expect(searchElement).toBeTruthy();
+  expect(searchElement).toBeInTheDocument();
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { consolidatedWeatherObject } from '../../../api/metaWeather/types';
-import roundingHelper from '../../helper/roundingHelper';
+import roundingHelper from '../../helpers/roundingHelper';
 
 type weatherCardLargeState = {
   consolidated_weather: consolidatedWeatherObject | null,
@@ -22,7 +22,7 @@ export default class WeatherCardLarge extends React.Component<any> {
     render() {
       const day = this.state.consolidated_weather;
       return <div className="col-sm-12">
-        <div className="card bg-transparent border-0">
+        <div className="card bg-transparent border-0" aria-label={day?.applicable_date}>
           <div className="card-body">
             <div className="row">
               <div className="col-sm-6">

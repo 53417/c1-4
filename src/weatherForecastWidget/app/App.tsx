@@ -70,7 +70,10 @@ export default class WeatherForecastWidget extends React.Component<any> {
         </div>
 
         <div className="row">
-          <SearchBar aria-label="search bar" updateWidgetState={this.updateWidgetState} handleGeolocation={this.handleGeolocation}/>
+          <SearchBar 
+            aria-label="search bar" 
+            updateWidgetState={this.updateWidgetState} 
+            handleGeolocation={this.handleGeolocation}/>
         </div>
 
         <div className="row">
@@ -78,7 +81,6 @@ export default class WeatherForecastWidget extends React.Component<any> {
             this.state.loading
               ? <div>Loading</div>
               : <WeatherCardLarge
-                aria-label={this.state.weatherData?.consolidated_weather[0].applicable_date}
                 weatherData={this.state.weatherData?.consolidated_weather[0]}/>
           }
         </div>
@@ -89,7 +91,7 @@ export default class WeatherForecastWidget extends React.Component<any> {
             this.state.loading
               ? <div>Loading</div>
               : this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
-                return <WeatherCardSmall aria-label={day.applicable_date} weatherData={day}/>;
+                return <WeatherCardSmall weatherData={day}/>;
               })
           }
         </div>

@@ -1,7 +1,7 @@
 {
   "name": "c1-4",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "give job",
   "engines": {
     "node": ">=14.13.0",
     "npm": ">=6.14.81"
@@ -16,14 +16,15 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^12.19.4",
     "@types/react": "^16.9.56",
+    "@types/react-bootstrap": "^0.32.24",
     "@types/react-dom": "^16.9.9",
     "bootstrap": "^4.5.3",
     "eslint": "^7.13.0",
     "http-proxy-middleware": "^1.0.6",
-    "jest": "^26.6.3",
     "jquery": "^3.5.1",
     "prettier": "^2.1.2",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
     "react-debounce-input": "^3.2.3",
     "react-dom": "^17.0.1",
     "react-scripts": "^4.0.0",
@@ -43,23 +44,14 @@
   "gitHooks": {
     "pre-commit": "npm run lint -- --fix && npm run pretty"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/53417/c1-4.git"
   },
   "devDependencies": {
-    "@types/react-bootstrap": "^0.32.24",
     "babel-eslint": "^10.1.0",
-    "gh-pages": "^3.1.0",
-    "react-bootstrap": "^1.4.0"
+    "gh-pages": "^3.1.0"
   },
-  "homepage": "http://53417.github.io/c1-4"
+  "homepage": "http://53417.github.io/c1-4",
+  "author": "53417"
 }
