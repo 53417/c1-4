@@ -2,9 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import WeatherCardSmall from '../../../weatherForecastWidget/components/weatherCardSmall/WeatherCardSmall';
 import weatherSearchResponse from '../../fixtures/metaWeather/weatherSearchResponse.json';
-import roundingHelper from '../../../weatherForecastWidget/helpers/roundingHelper';
 
-test('it renders', () => {
+test('renders weatherCardSmall', () => {
   const day = weatherSearchResponse.consolidated_weather[0];
   render(<WeatherCardSmall weatherData={day}/>);
   const weatherCardSmall = screen.getByLabelText(day.applicable_date);
