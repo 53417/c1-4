@@ -1,9 +1,9 @@
-import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 import React from 'react';
-import metaWeather from '../../api/metaWeather';
+import metaWeather from '../../../api/metaWeather/metaWeather';
 import { DebounceInput } from 'react-debounce-input';
-import { metaWeatherLocationSearchResponse } from '../../api/types';
-import './styles.css';
+import { metaWeatherLocationSearchResponse } from '../../../api/metaWeather/types';
+import '../../app/styles.css';
 
 type searchBarState = {
     locationQuery: string,

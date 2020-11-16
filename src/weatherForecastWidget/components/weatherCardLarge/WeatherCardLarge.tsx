@@ -1,6 +1,6 @@
 import React from 'react';
-import { consolidatedWeatherObject } from '../../api/types';
-import roundingHelper from './roundingHelper';
+import { consolidatedWeatherObject } from '../../../api/metaWeather/types';
+import roundingHelper from '../../helper/roundingHelper';
 
 type weatherCardLargeState = {
   consolidated_weather: consolidatedWeatherObject | null,

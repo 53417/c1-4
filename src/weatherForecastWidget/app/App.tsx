@@ -1,10 +1,10 @@
 import React from 'react';
 import './styles.css';
-import SearchBar from './SearchBar';
-import WeatherCardLarge from './WeatherCardLarge';
-import metaWeather from '../../api/metaWeather';
-import { metaWeatherLocationResponse, consolidatedWeatherObject } from '../../api/types';
-import WeatherCardSmall from './WeatherCardSmall';
+import SearchBar from '../components/searchBar/SearchBar';
+import WeatherCardLarge from '../components/weatherCardLarge/WeatherCardLarge';
+import metaWeather from '../../api/metaWeather/metaWeather';
+import { metaWeatherLocationResponse, consolidatedWeatherObject } from '../../api/metaWeather/types';
+import WeatherCardSmall from '../components/weatherCardSmall/WeatherCardSmall';
 
 type WeatherForecastWidgetState = {
   weatherData: metaWeatherLocationResponse | null,
@@ -70,14 +70,16 @@ export default class WeatherForecastWidget extends React.Component<any> {
         </div>
 
         <div className="row">
-          <SearchBar updateWidgetState={this.updateWidgetState} handleGeolocation={this.handleGeolocation}></SearchBar>
+          <SearchBar aria-label="search bar" updateWidgetState={this.updateWidgetState} handleGeolocation={this.handleGeolocation}/>
         </div>
 
         <div className="row">
           {
             this.state.loading
               ? <div>Loading</div>
-              : <WeatherCardLarge weatherData={this.state.weatherData?.consolidated_weather[0]}></WeatherCardLarge>
+              : <WeatherCardLarge
+                aria-label={this.state.weatherData?.consolidated_weather[0].applicable_date}
+                weatherData={this.state.weatherData?.consolidated_weather[0]}/>
           }
         </div>
 
@@ -87,7 +89,7 @@ export default class WeatherForecastWidget extends React.Component<any> {
             this.state.loading
               ? <div>Loading</div>
               : this.state.weatherData?.consolidated_weather.slice(1,4).map((day: consolidatedWeatherObject) => {
-                return <WeatherCardSmall weatherData={day}></WeatherCardSmall>;
+                return <WeatherCardSmall aria-label={day.applicable_date} weatherData={day}/>;
               })
           }
         </div>
